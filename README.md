@@ -1,5 +1,46 @@
 step-1 - npx create-expo-app@latest --template default@sdk-5.4
 step-2 reset the project so that extra file and folder will be deleted- npm run reset-project
+step-3 npm install nativewind react-native-reanimated react-native-safe-area-context
+       npm install --dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11 babel-preset-expo
+note- these commands used for using the tailwind css in the react native based project
+
+step-4 tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // NOTE: Update this to include the paths to all files that contain Nativewind classes.
+  content: ["./App.tsx", "./components/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+step-5 global.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+step-6 babel.config.js
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};
+
+step-7 metro.config.js
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+ 
+const config = getDefaultConfig(__dirname)
+ 
+module.exports = withNativeWind(config, { input: './global.css' })
+
+step-8 just import ""../global.css inside the app folder in the _layout.tsx. because sabse pahle humari ye file hi run hoti hai
 
 
 
