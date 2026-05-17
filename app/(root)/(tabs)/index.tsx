@@ -1,6 +1,7 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "expo-router";
 import type { ComponentProps } from "react";
 import { Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -176,15 +177,21 @@ const recommendedListings: Listing[] = [
 export default function HomeScreen() {
   const { width } = useWindowDimensions();
   const featuredCardWidth = Math.min(Math.max((width - 48) * 0.66, 220), 268);
+  const drawerNavigation = useNavigation("/(root)") as { openDrawer: () => void };
 
   return (
     <SafeAreaView edges={["top", "left", "right"]} className="flex-1 bg-[#FCFCFD]">
       <StatusBar style="dark" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 160 }}>
         <View className="px-4 pt-1">
-
           <View className="mt-6 flex-row items-start justify-between">
-            <View className="flex-1 pr-4">
+            <View className="flex-row items-center">
+              <Pressable
+                onPress={() => drawerNavigation.openDrawer()}
+                className="mr-3 h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-md shadow-black/10"
+              >
+                <Ionicons name="menu-outline" size={24} color="#101318" />
+              </Pressable>
               <Text className="text-[34px] font-black tracking-[-0.04em] text-[#101318]">
                 Home
               </Text>
