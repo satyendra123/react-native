@@ -1,3 +1,10 @@
+step-1 - npx create-expo-app@latest --template default@sdk-5.4
+step-2 reset the project so that extra file and folder will be deleted- npm run reset-project
+
+
+
+
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
